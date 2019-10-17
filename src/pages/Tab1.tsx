@@ -25,7 +25,7 @@ const Tab1: React.FC = () => {
   const [posts, setPosts] = useState();
 
   useEffect(() => {
-    axios.get(`https://jsonplaceholder.typicode.com/users`)
+    axios.get('https://app-ae25ef7f-eff0-469a-8f73-ef2bbd4b6965.cleverapps.io/api/user/')
       .then(res => {
         const data = res.data;
         console.log(data);
@@ -53,7 +53,7 @@ const Tab1: React.FC = () => {
               components. Check out some of the resources below for next steps.
             </p>
             <ul>
-              { posts ? posts.map((post:any,index:number) => <li key={index}>{post['name']}</li>) : null }
+              { posts ? posts.map((post:any,index:number) => <li key={index}>{post['email']}</li>) : null }
             </ul>
           </IonCardContent>
         </IonCard>
