@@ -67,24 +67,28 @@ const Tab1: React.FC = () => {
       })
   }, []);
 
+  function getNews() {
+    axios.get('https://app-ae25ef7f-eff0-469a-8f73-ef2bbd4b6965.cleverapps.io/api/news/')
+      .then(res => {
+        const data = res.data;
+        console.log(data);
+        setPosts(data);
+      })
+  }
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-
           <IonTitle>News</IonTitle>
-
           <IonButtons slot="secondary">
-            <IonButton>
+            <IonButton href="/addnews">
               <IonIcon icon={add} />
             </IonButton>
-            <IonButton>
+            <IonButton onClick={() => getNews()}>
               <IonIcon icon={refresh} />
             </IonButton>
           </IonButtons>
-
-
-
         </IonToolbar>
       </IonHeader>
       <IonContent>
