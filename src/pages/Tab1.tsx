@@ -14,9 +14,6 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  IonTabButton,
-  IonFab,
-  IonFabButton,
   IonSpinner,
   IonButtons,
   IonButton
@@ -50,12 +47,6 @@ const Tab1: React.FC = () => {
   const noposts = {
     //UGLY, WE NEED TO CENTER IT PROPERLY
     'padding' : '130px' as '130px',
-  }
-
-  const addbutton = {
-    'top' : '7px' as '7px',
-    '--width' : '6px' as '6px',
-    '--height' : '6px' as '6px'
   }
 
   useEffect(() => {
