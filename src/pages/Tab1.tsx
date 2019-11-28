@@ -3,19 +3,25 @@ import {
   IonCardContent,
   IonCardHeader,
   IonCardSubtitle,
-  IonCardTitle,
+  //IonCardTitle,
   IonContent,
   IonHeader,
   IonIcon,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonListHeader,
+  //IonItem,
+  //IonLabel,
+  //IonList,
+  //IonListHeader,
   IonPage,
   IonTitle,
-  IonToolbar
+  IonToolbar,
+  IonTabButton,
+  IonFab,
+  IonFabButton,
+  IonSpinner,
+  IonButtons,
+  IonButton
 } from '@ionic/react';
-import { book, build, colorFill, grid } from 'ionicons/icons';
+import { refresh, add } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Tab1.css';
@@ -24,8 +30,36 @@ const Tab1: React.FC = () => {
   // eslint-disable-next-line
   const [posts, setPosts] = useState();
 
+  const mypost = {
+    'background-color' : '#2ecc71' as '#2ecc71'
+  }
+
+  const otherpost = {
+    'background-color' : '#3498db' as '#3498db'
+  }
+
+  const postuser = {
+    'color' : 'white' as 'white',
+    'font-weight': 'bold' as 'bold'
+  }
+
+  const postcontent = {
+    'color' : 'white' as 'white'
+  }
+
+  const noposts = {
+    //UGLY, WE NEED TO CENTER IT PROPERLY
+    'padding' : '130px' as '130px',
+  }
+
+  const addbutton = {
+    'top' : '7px' as '7px',
+    '--width' : '6px' as '6px',
+    '--height' : '6px' as '6px'
+  }
+
   useEffect(() => {
-    axios.get('https://app-ae25ef7f-eff0-469a-8f73-ef2bbd4b6965.cleverapps.io/api/user/')
+    axios.get('https://app-ae25ef7f-eff0-469a-8f73-ef2bbd4b6965.cleverapps.io/api/news/')
       .then(res => {
         const data = res.data;
         console.log(data);
@@ -37,27 +71,46 @@ const Tab1: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab One</IonTitle>
+
+          <IonTitle>News</IonTitle>
+
+          <IonButtons slot="secondary">
+            <IonButton>
+              <IonIcon icon={add} />
+            </IonButton>
+            <IonButton>
+              <IonIcon icon={refresh} />
+            </IonButton>
+          </IonButtons>
+
+
+
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonCard className="welcome-card">
-          <img src="/assets/shapes.svg" alt="" />
-          <IonCardHeader>
-            <IonCardSubtitle>Get Started</IonCardSubtitle>
-            <IonCardTitle>Welcome to Ionic</IonCardTitle>
-          </IonCardHeader>
-          <IonCardContent>
-            <p>
-              Now that your app has been created, you'll want to start building out features and
-              components. Check out some of the resources below for next steps.
-            </p>
-            <ul>
-              { posts ? posts.map((post:any,index:number) => <li key={index}>{post['email']}</li>) : null }
-            </ul>
-          </IonCardContent>
-        </IonCard>
 
+      <div>
+        { posts ? posts.map((post:any,index:number) =>
+          <div key={index}>
+
+            <IonCard className="newspost" style={post['from_me'] ? mypost : otherpost}>
+              {/* <img src="/assets/shapes.svg" alt="" /> */}
+              <IonCardHeader>
+                <IonCardSubtitle style={postuser}>{post['from_me'] ? 'Me' : post['username']}</IonCardSubtitle>
+                {/* <IonCardTitle>News</IonCardTitle> */}
+              </IonCardHeader>
+              <IonCardContent>
+                <p style={postcontent}>
+                  {post['content']}
+                </p>
+              </IonCardContent>
+            </IonCard>
+
+          </div>) : <div style={noposts}><IonSpinner name="crescent"></IonSpinner></div> }
+      </div>
+
+
+      {/*
         <IonList lines="none">
           <IonListHeader>
             <IonLabel>Resources</IonLabel>
@@ -79,6 +132,8 @@ const Tab1: React.FC = () => {
             <IonLabel>Theme Your App</IonLabel>
           </IonItem>
         </IonList>
+        */}
+
       </IonContent>
     </IonPage>
   );
