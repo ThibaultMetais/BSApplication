@@ -31,6 +31,11 @@ const AddNewsPage: React.FC = () => {
     'color' : colormessage,
   }
 
+  const writeblock = {
+    'padding-top' : '20px' as '20px',
+    'padding-bottom' : '20px' as '20px'
+  }
+
   function postNews() {
     axios.post('https://app-ae25ef7f-eff0-469a-8f73-ef2bbd4b6965.cleverapps.io/api/news/', {
       content: content,
@@ -60,7 +65,7 @@ const AddNewsPage: React.FC = () => {
       <IonContent>
         <div style={formstyle}>
           <IonLabel position="stacked" style={section}>New post</IonLabel>
-          <IonInput type="text" placeholder="Write here" onIonChange={(c) => setContent(c.detail.value)}></IonInput>
+          <IonTextarea placeholder="Write here" onIonChange={(c) => setContent(c.detail.value)} style={writeblock}></IonTextarea>
           <IonButton expand="block" onClick={() => postNews()}>Submit</IonButton>
           <p style={messagestyle}>{message}</p>
         </div>
