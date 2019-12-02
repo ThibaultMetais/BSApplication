@@ -3,7 +3,7 @@ import {
   IonCardContent,
   IonCardHeader,
   IonCardSubtitle,
-  //IonCardTitle,
+  IonCardTitle,
   IonContent,
   IonHeader,
   IonIcon,
@@ -91,8 +91,8 @@ const Tab1: React.FC = () => {
             <IonCard className="newspost" style={post['from_me'] ? mypost : otherpost}>
               {/* <img src="/assets/shapes.svg" alt="" /> */}
               <IonCardHeader>
-                <IonCardSubtitle style={postuser}>{post['from_me'] ? 'Me' : post['username']}</IonCardSubtitle>
-                {/* <IonCardTitle>News</IonCardTitle> */}
+                <IonCardTitle style={postuser}>{post['from_me'] ? 'Me' : post['username']}</IonCardTitle>
+                <IonCardSubtitle style={postuser}>{new Date(post['created']).toUTCString()}</IonCardSubtitle>
               </IonCardHeader>
               <IonCardContent>
                 <p style={postcontent}>
